@@ -1,0 +1,31 @@
+<article class="actividad-card" [style.border-top-color]="actividad().colorTitulo || '#1e3a8a'">
+  <div class="actividad-imagen-contenedor">
+    <img [src]="actividad().imagen" [alt]="actividad().titulo" class="actividad-imagen" />
+  </div>
+  <div class="actividad-contenido">
+    <h3 class="actividad-titulo" [style.color]="actividad().colorTitulo || '#1e3a8a'">
+      {{ actividad().titulo }}
+    </h3>
+    <p class="actividad-descripcion" [innerHTML]="actividad().descripcion"></p>
+    
+    <div class="actividad-enlaces">
+      @if (actividad().enlaceInstagram) {
+        <a [href]="actividad().enlaceInstagram" target="_blank" class="btn-instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2.163c3.204 0 5.992 1.709 7.508 4.257l.083.157c1.403 2.63 1.403 5.808 0 8.487l-.083.157C17.992 18.291 15.204 20 12 20s-5.992-1.709-7.508-4.257l-.083-.157c-1.403-2.68-1.403-5.858 0-8.487l.083-.157C6.008 3.872 8.796 2.163 12 2.163zm0 1.827c-2.905 0-5.485 1.554-6.909 4.074l-.089.168c-1.296 2.517-1.296 5.476 0 8.0l.089.167c1.424 2.52 4.004 4.074 6.909 4.074s5.485-1.554 6.909-4.074l.089-.167c1.296-2.524 1.296-5.483 0-8.0l-.089-.168C17.485 5.544 14.905 4.0 12 4.0zm0 3.636c2.474 0 4.482 2.005 4.482 4.482 0 2.475-2.008 4.482-4.482 4.482-2.475 0-4.482-2.007-4.482-4.482 0-2.477 2.007-4.482 4.482-4.482zm0 1.414c-1.751 0-3.073 1.412-3.073 3.073 0 1.758 1.322 3.073 3.073 3.073 1.758 0 3.073-1.315 3.073-3.073 0-1.761-1.315-3.073-3.073-3.073z"/>
+          </svg>
+          {{ actividad().titulo.split(' ')[0] }}
+        </a>
+      }
+      
+      @if (actividad().enlaceMapa) {
+        <a [href]="actividad().enlaceMapa" target="_blank" class="btn-mapa">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2C8 2 2 8 2 12c0 3.7 2.7 7.5 8 11.5.7.6 1.3.6 2 0 5.3-4 8-7.8 8-11.5C22 6 16 2 12 2zm0 2c3.9 0 7 3.1 7 7 0 2.6-1.9 5.4-6.8 9.8-1.8 1.5-3.3 2.2-4.2 2.2-.9 0-2.4-.7-4.2-2.2C5.9 16.4 7 13.6 7 11c0-3.9 3.1-7 7-7zm0 4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 8c-2.2 0-4-1.8-4-4 0-.1 0-.2.1-.3.9-1.5 2.4-2.4 4.1-2.4s3.1.9 4.1 2.4c.1.1.2.3.2.4 0 2.2-1.8 4-4 4z"/>
+          </svg>
+          Cómo llegar
+        </a>
+      }
+    </div>
+  </div>
+</article>

@@ -1,0 +1,15 @@
+<div class="inicio-container">
+  <app-encabezado></app-encabezado>
+  
+  
+  <app-hero></app-hero>
+  
+  <section id="actividades" class="actividades-section">
+    <div class="actividades-grid">
+      @for (actividad of actividades; track actividad.id) {
+        <app-tarjeta-actividad [actividad]="actividad"></app-tarjeta-actividad>
+      }
+    </div>
+  </section>
+  <app-pie-pagina></app-pie-pagina>
+</div>
