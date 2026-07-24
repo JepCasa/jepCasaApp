@@ -1,7 +1,7 @@
 # JepCasaApp
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.9.
-
+MANDAR CAMBIOS: ng deploy --base-href=/jepCasaApp/
 ## Development server
 
 To start a local development server, run:
