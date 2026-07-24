@@ -4,7 +4,7 @@ import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-llamamiento',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './llamamiento.html',
   styleUrl: './llamamiento.css',
   standalone: true,
