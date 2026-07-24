@@ -12,6 +12,6 @@ import { ActividadService } from '../actividad.service';
 export class Encabezado {
   private actividadService = inject(ActividadService);
   
-  logoPrincipal = '/images/logoJep.jpg';
-  logoDeportes = '/images/jepDeportesLogo.jpeg';
+  logoPrincipal = 'images/logoJep.jpg';
+  logoDeportes = 'images/jepDeportesLogo.jpeg';
 }
