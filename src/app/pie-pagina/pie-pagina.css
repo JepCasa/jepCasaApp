@@ -1,74 +1,173 @@
 .pie-pagina-container {
-  background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+  background:
+    radial-gradient(circle at 15% 20%,
+      rgba(212, 163, 115, 0.18),
+      transparent 45%),
+    linear-gradient(135deg,
+      #24150d 0%,
+      #3b2416 55%,
+      #5a3822 100%);
+
   color: white;
+
   padding: 3rem 1rem 2rem;
+
   margin-top: 4rem;
+
+  border-top: 1px solid rgba(212, 163, 115, 0.20);
 }
+
 
 .pie-pagina-contenido {
   max-width: 1200px;
+
   margin: 0 auto;
+
   display: flex;
+
   justify-content: space-between;
+
   align-items: center;
+
   flex-wrap: wrap;
+
   gap: 2rem;
 }
+
 
 .pie-pagina-info {
   text-align: left;
 }
 
+
 .pie-pagina-direccion {
   font-size: 1rem;
+
   margin: 0 0 0.5rem 0;
-  color: rgba(255, 255, 255, 0.8);
+
+  color: #eadbc9;
+
   font-weight: 300;
 }
 
-.pie-pagina-nombre {
-  font-size: 1.125rem;
-  margin: 0;
-  font-weight: 500;
-  color: white;
+
+.pie-pagina-info {
+  text-align: left;
 }
+
+
+.pie-pagina-direccion {
+  font-size: 1rem;
+
+  margin: 0 0 0.5rem 0;
+
+  color: #eadbc9;
+
+  font-weight: 300;
+}
+
 
 .pie-pagina-redes {
   display: flex;
+
   gap: 1rem;
 }
 
+
 .pie-pagina-red {
   display: flex;
+
   align-items: center;
+
   gap: 0.5rem;
-  color: rgba(255, 255, 255, 0.8);
+
+  color: #eadbc9;
+
   text-decoration: none;
+
   font-size: 0.875rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem;
-  background: rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+
+  padding: 0.6rem 1rem;
+
+  border-radius: 50px;
+
+  background: rgba(212, 163, 115, 0.10);
+
+  border: 1px solid rgba(212, 163, 115, 0.20);
+
+  transition:
+    all 0.3s ease;
 }
 
 .pie-pagina-red:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
+  background: rgba(212, 163, 115, 0.22);
+
+  border-color: rgba(212, 163, 115, 0.40);
+
+  color: #ffffff;
+
   transform: translateY(-2px);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.20);
+}
+
+.pie-pagina-red i {
+  color: #d4a373;
+
+  font-size: 1rem;
 }
 
 @media (max-width: 768px) {
-  .pie-pagina-contenido {
+
+  .encabezado-header {
+    padding: 2.5rem 1rem 1.8rem;
+  }
+
+
+  .encabezado-logos {
     flex-direction: column;
-    text-align: center;
+
     gap: 1.5rem;
   }
-  
+
+
+  .encabezado-logo {
+    height: 60px;
+    width: 60px;
+  }
+
+
+  .encabezado-titulo {
+    font-size: 2rem;
+  }
+
+
+  .encabezado-subtitulo {
+    font-size: 1rem;
+
+    padding: 0 1rem;
+  }
+
+
+  .pie-pagina-contenido {
+    flex-direction: column;
+
+    text-align: center;
+
+    gap: 1.5rem;
+  }
+
+
   .pie-pagina-info {
     text-align: center;
   }
-  
+
+
   .pie-pagina-redes {
     justify-content: center;
+
+    flex-wrap: wrap;
   }
+
 }

@@ -1,100 +1,568 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
 .llamamiento-container {
-  background: linear-gradient(135deg, #c7d2fe, #e0e7ff);
-  font-family: 'Poppins', sans-serif;
-  color: #1e3a8a;
+  position: relative;
   min-height: 100vh;
+  overflow: hidden;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+
+  padding: 2rem 1.5rem;
+
+  font-family: 'Poppins', sans-serif;
   text-align: center;
+
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(212, 163, 115, 0.30),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 85% 85%,
+      rgba(139, 94, 60, 0.35),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #24150d,
+      #3b2416 50%,
+      #5a3822
+    );
+
+  color: #fff;
 }
+
+
+/* =========================
+   LUCES DE FONDO
+========================= */
+
+.blur {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.30;
+  pointer-events: none;
+}
+
+.blur-1 {
+  width: 280px;
+  height: 280px;
+
+  background: #d4a373;
+
+  top: -100px;
+  left: -100px;
+}
+
+.blur-2 {
+  width: 300px;
+  height: 300px;
+
+  background: #8b5e3c;
+
+  right: -120px;
+  bottom: -100px;
+}
+
+
+/* =========================
+   TARJETA PRINCIPAL
+========================= */
 
 .mensaje-box {
-  background: white;
-  border-radius: 1rem;
-  padding: 3rem;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-  max-width: 800px;
+  position: relative;
+  z-index: 2;
+
   width: 100%;
+  max-width: 850px;
+
+  padding: 3.5rem 3rem;
+
+  border-radius: 30px;
+
+  background: rgba(250, 243, 231, 0.10);
+
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.35);
 }
+
+
+/* =========================
+   BADGE
+========================= */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 8px 16px;
+
+  border-radius: 50px;
+
+  background: rgba(212, 163, 115, 0.15);
+
+  border: 1px solid rgba(212, 163, 115, 0.30);
+
+  color: #f1d4b2;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  margin-bottom: 1.3rem;
+}
+
+.badge i {
+  color: #d4a373;
+}
+
+
+/* =========================
+   TITULO
+========================= */
 
 .mensaje-titulo {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #1e3a8a;
+  margin: 0 0 1rem;
+
+  font-size: clamp(2.2rem, 5vw, 4rem);
+
+  line-height: 1.1;
+
+  font-weight: 800;
+
+  background: linear-gradient(
+    90deg,
+    #ffffff,
+    #f5d0a9,
+    #d4a373
+  );
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
+
 
 .mensaje-subtitulo {
-  font-size: 1.1rem;
-  margin-bottom: 1.5rem;
-  color: #111827;
+  max-width: 650px;
+
+  margin: 0 auto 2.5rem;
+
+  color: #eadbc9;
+
+  font-size: 1.05rem;
+
+  line-height: 1.7;
 }
+
+
+/* =========================
+   CARRUSEL
+========================= */
+
+.versiculo-container {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  margin: 1rem auto;
+}
+
 
 .versiculo {
-  font-style: italic;
-  margin: 1.5rem 0;
-  color: #374151;
-  border-left: 4px solid #e0e7ff;
-  padding-left: 1rem;
+  flex: 1;
+
+  min-height: 230px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  padding: 2rem 2.5rem;
+
+  border-radius: 24px;
+
+  background: rgba(250, 243, 231, 0.08);
+
+  border: 1px solid rgba(212, 163, 115, 0.25);
+
+  opacity: 1;
+  visibility: visible;
 }
 
-.prrafo-adicional {
-  margin: 1.5rem 0;
-  color: #4b5563;
-  font-size: 1rem;
+
+/* Animación al cambiar */
+
+.versiculo.cambiando {
+  animation: cambiarVersiculo 0.4s ease;
 }
+
+@keyframes cambiarVersiculo {
+
+  0% {
+    opacity: 0.3;
+    transform: translateY(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+
+/* =========================
+   COMILLAS
+========================= */
+
+.comillas {
+  font-family: Georgia, serif;
+
+  font-size: 5rem;
+
+  line-height: 0.6;
+
+  color: #d4a373;
+
+  margin-bottom: 1.3rem;
+}
+
+
+/* =========================
+   TEXTO DEL VERSICULO
+========================= */
+
+.texto-versiculo {
+  max-width: 650px;
+
+  margin: 0;
+
+  color: #fffaf3;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+
+  line-height: 1.6;
+
+  font-style: italic;
+}
+
+
+/* =========================
+   REFERENCIA
+========================= */
+
+.referencia {
+  margin-top: 1.2rem;
+
+  color: #e8bd8d;
+
+  font-size: 0.9rem;
+
+  font-weight: 700;
+
+  letter-spacing: 1px;
+}
+
+
+/* =========================
+   FLECHAS
+========================= */
+
+.flecha {
+  flex-shrink: 0;
+
+  width: 48px;
+  height: 48px;
+
+  padding: 0;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(212, 163, 115, 0.35);
+
+  background: rgba(212, 163, 115, 0.12);
+
+  color: #f5d0a9;
+
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: Arial, sans-serif;
+
+  font-size: 2rem;
+  font-weight: 300;
+
+  line-height: 1;
+
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+.flecha:hover {
+  background: rgba(212, 163, 115, 0.25);
+
+  border-color: rgba(212, 163, 115, 0.55);
+
+  transform: scale(1.08);
+
+  color: #fff;
+}
+
+
+.flecha:active {
+  transform: scale(0.95);
+}
+
+
+/* Si seguís usando Bootstrap Icons */
+
+.flecha i {
+  font-size: 1.1rem;
+}
+
+
+/* =========================
+   INDICADORES
+========================= */
+
+.indicadores {
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-top: 1rem;
+}
+
+
+.indicadores span {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.25);
+
+  cursor: pointer;
+
+  transition:
+    width 0.3s ease,
+    background 0.3s ease;
+}
+
+
+.indicadores span.activo {
+  width: 25px;
+
+  border-radius: 10px;
+
+  background: #d4a373;
+}
+
+
+/* =========================
+   MENSAJE FINAL
+========================= */
+
+.prrafo-adicional {
+  max-width: 600px;
+
+  margin: 2rem auto 1.3rem;
+
+  color: #eadbc9;
+
+  line-height: 1.7;
+}
+
+
+.mensaje-final {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 10px;
+
+  margin: 1.5rem auto;
+
+  color: #f5e7d5;
+
+  font-size: 0.95rem;
+}
+
+
+.mensaje-final i {
+  color: #d4a373;
+
+  font-size: 1.3rem;
+}
+
+
+.mensaje-final p {
+  margin: 0;
+}
+
+
+/* =========================
+   BOTON PRINCIPAL
+========================= */
 
 .btn {
   display: inline-flex;
+
   align-items: center;
-  gap: 0.5rem;
-  padding: 0.8rem 2rem;
-  border-radius: 10px;
-  font-size: 1.1rem;
-  font-weight: 500;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  border: none;
+
   justify-content: center;
+
+  gap: 10px;
+
+  margin-top: 1rem;
+
+  padding: 0.9rem 1.7rem;
+
+  border: none;
+
+  border-radius: 50px;
+
+  font-size: 1rem;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  color: #fff;
+
+  background: linear-gradient(
+    135deg,
+    #8b5e3c,
+    #b77b4d
+  );
+
+  box-shadow:
+    0 10px 30px rgba(139, 94, 60, 0.35);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    background 0.3s ease;
 }
 
-.btn-primary {
-  background: #1e3a8a;
-  color: white;
+
+.btn:hover {
+  color: #fff;
+
+  transform: translateY(-3px);
+
+  background: linear-gradient(
+    135deg,
+    #9b6a45,
+    #c58b5b
+  );
+
+  box-shadow:
+    0 15px 35px rgba(212, 163, 115, 0.35);
 }
 
-.btn-primary:hover {
-  background: #4338ca;
-}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
-  position: static;
-  margin-top: auto;
-  text-align: center;
-  font-size:  �8.9rem;
-  color: #6b7280;
-  padding: 1rem 0;
+  position: relative;
+
+  z-index: 2;
+
+  margin-top: 2rem;
+
+  color: rgba(255, 239, 220, 0.45);
+
+  font-size: 0.75rem;
 }
 
-@media (max-width: 768px) {
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
   .llamamiento-container {
-    padding: 1.5rem;
+    padding: 1.2rem;
   }
-  
+
+
   .mensaje-box {
-    padding: 2rem;
+    padding: 2.3rem 1.2rem;
+
+    border-radius: 24px;
   }
-  
-  .mensaje-titulo {
-    font-size: 1.8rem;
+
+
+  .mensaje-subtitulo {
+    font-size: 0.95rem;
   }
-  
+
+
+  .versiculo-container {
+    gap: 5px;
+  }
+
+
   .versiculo {
-    padding-left: 0.8rem;
-    border-left-width: 3px;
+    min-height: 280px;
+
+    padding: 1.5rem 1rem;
   }
+
+
+  .texto-versiculo {
+    font-size: 1.15rem;
+  }
+
+
+  .flecha {
+    width: 38px;
+    height: 38px;
+
+    font-size: 1.7rem;
+  }
+
+
+  .mensaje-final {
+    font-size: 0.85rem;
+  }
+
+
+  .btn {
+    width: 100%;
+  }
+
 }

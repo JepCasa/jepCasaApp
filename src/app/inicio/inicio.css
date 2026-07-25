@@ -1,47 +1,172 @@
+/* =========================
+   INICIO
+========================= */
+
 .inicio-container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f3f4f6 0%, #dbeafe 100%);
+
+  background:
+    radial-gradient(
+      circle at 10% 10%,
+      rgba(212, 163, 115, 0.12),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 90% 90%,
+      rgba(139, 94, 60, 0.08),
+      transparent 35%
+    ),
+    linear-gradient(
+      135deg,
+      #faf7f2 0%,
+      #f5ede3 50%,
+      #eee1d2 100%
+    );
+
   display: flex;
+
   flex-direction: column;
+
   position: relative;
+
   overflow-x: hidden;
 }
 
+
+/* =========================
+   SECCIÓN ACTIVIDADES
+========================= */
+
 .actividades-section {
   padding: 4rem 1rem;
+
   max-width: 1400px;
+
   margin: 0 auto;
+
   width: 100%;
+
   position: relative;
+
   z-index: 1;
 }
 
+
+/* =========================
+   GRID
+========================= */
+
 .actividades-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+
+  grid-template-columns:
+    repeat(
+      auto-fill,
+      minmax(320px, 1fr)
+    );
+
   gap: 2rem;
+
   padding: 0 1rem;
 }
 
+
+/* =========================
+   DECORACIÓN SUTIL
+========================= */
+
+.inicio-container::before {
+  content: '';
+
+  position: absolute;
+
+  width: 350px;
+  height: 350px;
+
+  border-radius: 50%;
+
+  background: rgba(212, 163, 115, 0.08);
+
+  filter: blur(80px);
+
+  top: 30%;
+
+  left: -180px;
+
+  pointer-events: none;
+}
+
+
+.inicio-container::after {
+  content: '';
+
+  position: absolute;
+
+  width: 350px;
+  height: 350px;
+
+  border-radius: 50%;
+
+  background: rgba(139, 94, 60, 0.06);
+
+  filter: blur(80px);
+
+  bottom: 10%;
+
+  right: -180px;
+
+  pointer-events: none;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
 @media (max-width: 768px) {
+
   .inicio-container {
     min-height: auto;
   }
-  
+
+
   .actividades-section {
     padding: 3rem 0.5rem;
   }
-  
+
+
   .actividades-grid {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns:
+      repeat(
+        auto-fill,
+        minmax(280px, 1fr)
+      );
+
     gap: 1.5rem;
+
     padding: 0 0.5rem;
   }
+
 }
 
+
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 480px) {
+
+  .actividades-section {
+    padding: 2.5rem 0.75rem;
+  }
+
+
   .actividades-grid {
     grid-template-columns: 1fr;
+
     gap: 1.25rem;
+
+    padding: 0;
   }
+
 }

@@ -1,25 +1,78 @@
 <section class="llamamiento-container">
-  <div class="mensaje-box">
-    <h1 class="mensaje-titulo">{{ mensajeTitulo }}</h1>
-    <p class="mensaje-subtitulo">{{ mensajeSubtitulo }}</p>
-    <div class="versiculo">
-      <p><strong>Jeremías 31:3</strong><br>"CON AMOR ETERNO TE HE AMADO"</p>
-      <p><strong>2 Corintios 6:2</strong><br>"Ahora es el tiempo favorable; he aquí, ahora es el día de salvación."</p>
-      <p><strong>Juan 3:16-17</strong><br>"Porque de tal manera amó Dios al mundo, que ha dado a su Hijo unigénito,
-para que todo aquel que en Él crea no se pierda, mas tenga vida eterna.
-        Porque no envió Dios a su Hijo al
-        mundo para condenar al mundo, sino para que el mundo sea salvo por él."</p>
+
+  <!-- Decoración de fondo -->
+  <div class="blur blur-1"></div>
+  <div class="blur blur-2"></div>
+
+  <main class="mensaje-box">
+
+    <div class="badge">
+      <i class="bi bi-heart-fill"></i>
+      Un mensaje para vos
     </div>
-    <p class="prrafo-adicional">{{ prrafoAdicional }}</p>
 
-    <p>Jesús te está llamando hoy. No es casualidad que estés leyendo esto.</p>
+    <h1 class="mensaje-titulo">
+      {{ mensajeTitulo }}
+    </h1>
 
-    <a [routerLink]="['/']" class="btn btn-primary mt-3">
-      <i class="bi bi-house-heart-fill"></i> Conocer la Iglesia JEP
+    <p class="mensaje-subtitulo">
+      {{ mensajeSubtitulo }}
+    </p>
+
+    <!-- CARRUSEL -->
+    <div class="versiculo-container">
+
+      <button class="flecha izquierda" (click)="anterior()" aria-label="Versículo anterior">
+        ‹
+      </button>
+
+      <div class="versiculo" [class.cambiando]="animando">
+
+        <div class="comillas">“</div>
+
+        <p class="texto-versiculo">
+          {{ versiculos[indiceActual].texto }}
+        </p>
+
+        <span class="referencia">
+          {{ versiculos[indiceActual].referencia }}
+        </span>
+
+      </div>
+
+      <button class="flecha derecha" (click)="siguiente()" aria-label="Siguiente versículo">
+        ›
+      </button>
+
+    </div>
+
+    <!-- Indicadores -->
+    <div class="indicadores">
+      <span *ngFor="let versiculo of versiculos; let i = index" [class.activo]="i === indiceActual" (click)="irA(i)">
+      </span>
+    </div>
+
+    <p class="prrafo-adicional">
+      {{ prrafoAdicional }}
+    </p>
+
+    <div class="mensaje-final">
+      <i class="bi bi-stars"></i>
+      <p>
+        Jesús te está llamando hoy.
+        <strong>No es casualidad que estés acá.</strong>
+      </p>
+    </div>
+
+    <a [routerLink]="['/']" class="btn btn-primary">
+      <i class="bi bi-house-heart-fill"></i>
+      Conocer la Iglesia JEP
     </a>
-  </div>
+
+  </main>
 
   <footer>
-    Iglesia JEP - Jesús Es mi Pastor © 2025
+    Iglesia JEP · Jesús Es mi Pastor © 2025
   </footer>
+
 </section>
