@@ -1,46 +1,51 @@
-<footer class="pie-pagina-container">
-  <div class="pie-pagina-contenido">
+<footer class="footer">
 
-    <div class="pie-pagina-info">
+  <div class="footer-container">
 
-      <p class="pie-pagina-direccion">
-        <i class="bi bi-geo-alt-fill"></i>
-        Beron de Astrada 5781, La Tablada
-      </p>
+    <div class="footer-info">
 
-      <p class="pie-pagina-nombre">
-        Iglesia JEP - Jesús Es mi Pastor © {{ currentYear }}
-      </p>
+      <img [src]="logoPrincipal" alt="Logo Iglesia JEP" class="footer-logo">
+
+      <div>
+
+        <h3>Iglesia JEP</h3>
+
+        <p>Jesús Es mi Pastor © {{ currentYear }}</p>
+
+      </div>
 
     </div>
 
-    <div class="pie-pagina-redes">
+    <div class="footer-contacto">
 
-      <a
-        href="https://www.instagram.com/jepcasa/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="pie-pagina-red">
+      <div class="footer-item">
+        <i class="bi bi-geo-alt"></i>
+        <span>Berón de Astrada 5781, La Tablada</span>
+      </div>
+
+      <div class="footer-item">
+        <i class="bi bi-clock"></i>
+        <span>Todos son bienvenidos</span>
+      </div>
+
+    </div>
+
+    <div class="footer-redes">
+
+      <a href="https://www.instagram.com/jepcasa/" target="_blank" rel="noopener noreferrer">
 
         <i class="bi bi-instagram"></i>
 
-        <span>Instagram</span>
-
       </a>
 
-      <a
-        href="https://www.facebook.com/jesus.e.pastor.37"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="pie-pagina-red">
+      <a href="https://www.facebook.com/jesus.e.pastor.37" target="_blank" rel="noopener noreferrer">
 
         <i class="bi bi-facebook"></i>
-
-        <span>Facebook</span>
 
       </a>
 
     </div>
 
   </div>
+
 </footer>

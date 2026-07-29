@@ -1,25 +1,52 @@
-<section class="hero-section">
-  <div class="hero-content">
-    <div class="hero-text">
-      <h2 class="hero-badge">Bienvenido a JEP</h2>
-      <h1 class="hero-title">Descubre todas las actividades de la iglesia</h1>
-      <p class="hero-description">
-        Cada semana ofrecemos espacios de encuentro, crecimiento y comunidad para todas las edades.
-        ¡Únete a nosotros en este camino de fe y servicio juntos!
-      </p>
-      <div class="hero-actions">
-        <a href="#actividades" class="btn btn-primary btn-lg">
-          Explorar Actividades
-        </a>
-        <a [routerLink]="['/llamamiento']" class="btn btn-outline">
-          Mensaje para ti 💌
-        </a>
-      </div>
+<section class="hero">
+
+    <div class="hero-contenido">
+
+        <div class="hero-texto">
+
+            <span class="badge">
+                Bienvenido a JEP
+            </span>
+
+            <h2>
+                Descubre todas las actividades de la iglesia
+            </h2>
+
+            <p>
+                Cada semana compartimos reuniones, encuentros y actividades para todas las edades.
+                Queremos que encuentres un lugar donde crecer en la fe y conocer nuevas personas.
+            </p>
+
+            <div class="hero-botones">
+
+                <a
+                    href="#actividades"
+                    class="btn btn-principal">
+
+                    Ver actividades
+
+                </a>
+
+                <a
+                    [routerLink]="['/llamamiento']"
+                    class="btn btn-secundario">
+
+                    Mensaje para ti 💌
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-imagen">
+
+            <img
+                src="images/jepcasa2.jpg"
+                alt="Iglesia JEP">
+
+        </div>
+
     </div>
-    <div class="hero-visual">
-      <div class="hero-image-wrapper">
-        <img src="images/jepcasa2.jpg" alt="Reunión General" class="hero-image" />
-      </div>
-    </div>
-  </div>
+
 </section>

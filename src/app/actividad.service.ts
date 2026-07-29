@@ -8,6 +8,7 @@ export interface Actividad {
   colorTitulo?: string;
   enlaceInstagram?: string;
   enlaceMapa?: string;
+  boton?: string;
 }
 
 @Injectable({
@@ -22,7 +23,8 @@ export class ActividadService {
       imagen: 'images/jepcasa2.jpg',
       colorTitulo: '#1e3a8a',
       enlaceInstagram: 'https://www.instagram.com/jepcasa/',
-      enlaceMapa: 'https://maps.app.goo.gl/AFFJ3zzauuSs1ewo6'
+      enlaceMapa: 'https://maps.app.goo.gl/AFFJ3zzauuSs1ewo6',
+      boton: 'Jep Casa'
     },
     {
       id: 2,
@@ -30,7 +32,8 @@ export class ActividadService {
       descripcion: '⚽🏐 Sábados 11:00 hs (Fútbol, Vóley)<br>¡Un hermoso tiempo entre amigos!',
       imagen: 'images/jepDeportes.jpg',
       colorTitulo: '#16a34a',
-      enlaceInstagram: 'https://www.instagram.com/jepdeportes/'
+      enlaceInstagram: 'https://www.instagram.com/jepdeportes/',
+      boton: 'Jep Deportes'
     },
     {
       id: 3,

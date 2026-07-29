@@ -1,151 +1,48 @@
-.encabezado-header {
-  text-align: center;
+.encabezado{
 
-  padding: 3rem 1rem 2rem;
+    background:#ffffff;
 
-  background:
-    radial-gradient(circle at 20% 20%,
-      rgba(212, 163, 115, 0.25),
-      transparent 50%),
-    radial-gradient(circle at 80% 80%,
-      rgba(139, 94, 60, 0.30),
-      transparent 50%),
-    linear-gradient(135deg,
-      #24150d 0%,
-      #3b2416 50%,
-      #5a3822 100%);
+    text-align:center;
 
-  color: white;
+    padding:48px 20px 36px;
 
-  position: relative;
+    border-bottom:1px solid #ececec;
 
-  overflow: hidden;
 }
 
-.encabezado-header::before {
-  content: '';
+.logo{
 
-  position: absolute;
+    width:78px;
+    height:78px;
 
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+    border-radius:50%;
 
-  background:
-    radial-gradient(circle at 20% 20%,
-      rgba(212, 163, 115, 0.12) 0%,
-      transparent 50%),
-    radial-gradient(circle at 80% 80%,
-      rgba(245, 208, 169, 0.08) 0%,
-      transparent 50%);
+    object-fit:cover;
 
-  z-index: 0;
+    margin-bottom:18px;
 
-  pointer-events: none;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
 }
 
-.encabezado-logos {
-  display: flex;
+.encabezado h1{
 
-  justify-content: center;
-  align-items: center;
+    margin:0;
 
-  gap: 2rem;
+    font-size:2.2rem;
 
-  margin-bottom: 1.5rem;
+    font-weight:700;
 
-  position: relative;
-  z-index: 1;
+    color:#111827;
+
 }
 
-.encabezado-logo {
-  height: 80px;
-  width: 80px;
+.encabezado p{
 
-  border-radius: 50%;
+    margin-top:10px;
 
-  object-fit: cover;
+    color:#6b7280;
 
-  background: #fffaf3;
+    font-size:1.05rem;
 
-  padding: 8px;
-
-  border: 2px solid rgba(212, 163, 115, 0.5);
-
-  box-shadow:
-    0 4px 20px rgba(0, 0, 0, 0.25),
-    0 0 0 5px rgba(212, 163, 115, 0.08);
-
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-.encabezado-logo:hover {
-  transform: scale(1.05);
-
-  box-shadow:
-    0 8px 30px rgba(0, 0, 0, 0.3),
-    0 0 0 7px rgba(212, 163, 115, 0.12);
-}
-
-.encabezado-titulo {
-  font-size: 2.5rem;
-
-  font-weight: 700;
-
-  margin: 0;
-
-  letter-spacing: -0.02em;
-
-  position: relative;
-  z-index: 1;
-
-  background: linear-gradient(
-    90deg,
-    #ffffff,
-    #f5d0a9,
-    #d4a373
-  );
-
-  background-clip: text;
-  -webkit-background-clip: text;
-
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
-
-.encabezado-subtitulo {
-  font-size: 1.125rem;
-
-  color: #eadbc9;
-
-  margin-top: 0.75rem;
-
-  position: relative;
-  z-index: 1;
-
-  font-weight: 300;
-}
-
-@media (max-width: 768px) {
-  .encabezado-logos {
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .encabezado-logo {
-    height: 60px;
-    width: 60px;
-  }
-
-  .encabezado-titulo {
-    font-size: 2rem;
-  }
-
-  .encabezado-subtitulo {
-    font-size: 1rem;
-    padding: 0 1rem;
-  }
 }

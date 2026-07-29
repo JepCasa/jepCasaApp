@@ -10,4 +10,5 @@ import { CommonModule } from '@angular/common';
 })
 export class PiePagina {
   currentYear = new Date().getFullYear();
+  logoPrincipal = 'images/logoJep.jpg';
 }

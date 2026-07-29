@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+/* ======================================
+   CONTENEDOR
+====================================== */
 
 .llamamiento-container {
   position: relative;
@@ -10,431 +12,408 @@
   justify-content: center;
   align-items: center;
 
-  padding: 2rem 1.5rem;
+  padding: 70px 20px;
 
-  font-family: 'Poppins', sans-serif;
+  font-family: "Inter", sans-serif;
   text-align: center;
 
   background:
-    radial-gradient(
-      circle at 15% 15%,
-      rgba(212, 163, 115, 0.30),
-      transparent 35%
-    ),
-    radial-gradient(
-      circle at 85% 85%,
-      rgba(139, 94, 60, 0.35),
-      transparent 35%
-    ),
-    linear-gradient(
-      135deg,
-      #24150d,
-      #3b2416 50%,
-      #5a3822
-    );
-
-  color: #fff;
+    radial-gradient(circle at top left,
+      #dbeafe 0%,
+      transparent 40%),
+    radial-gradient(circle at bottom right,
+      #ecfeff 0%,
+      transparent 45%),
+    #f8fafc;
 }
 
-
-/* =========================
-   LUCES DE FONDO
-========================= */
+/* ======================================
+   LUCES
+====================================== */
 
 .blur {
   position: absolute;
   border-radius: 50%;
-  filter: blur(90px);
-  opacity: 0.30;
+  filter: blur(120px);
+  opacity: .45;
   pointer-events: none;
 }
 
 .blur-1 {
-  width: 280px;
-  height: 280px;
-
-  background: #d4a373;
-
-  top: -100px;
-  left: -100px;
+  width: 320px;
+  height: 320px;
+  background: #bfdbfe;
+  top: -120px;
+  left: -120px;
 }
 
 .blur-2 {
-  width: 300px;
-  height: 300px;
-
-  background: #8b5e3c;
-
+  width: 340px;
+  height: 340px;
+  background: #ccfbf1;
+  bottom: -120px;
   right: -120px;
-  bottom: -100px;
 }
 
-
-/* =========================
-   TARJETA PRINCIPAL
-========================= */
+/* ======================================
+   TARJETA
+====================================== */
 
 .mensaje-box {
   position: relative;
   z-index: 2;
 
   width: 100%;
-  max-width: 850px;
+  max-width: 900px;
 
-  padding: 3.5rem 3rem;
+  padding: 60px;
 
-  border-radius: 30px;
+  background: #fff;
 
-  background: rgba(250, 243, 231, 0.10);
+  border-radius: 28px;
 
-  border: 1px solid rgba(255, 255, 255, 0.18);
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid #e5e7eb;
 
   box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.35);
+    0 20px 50px rgba(15, 23, 42, .08);
+
+  transition: .3s;
 }
 
-
-/* =========================
+/* ======================================
    BADGE
-========================= */
+====================================== */
 
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 
-  padding: 8px 16px;
+  padding: 10px 18px;
 
-  border-radius: 50px;
+  border-radius: 999px;
 
-  background: rgba(212, 163, 115, 0.15);
+  background: #eff6ff;
 
-  border: 1px solid rgba(212, 163, 115, 0.30);
+  color: #2563eb;
 
-  color: #f1d4b2;
-
-  font-size: 0.85rem;
   font-weight: 600;
 
-  margin-bottom: 1.3rem;
+  font-size: .9rem;
+
+  margin-bottom: 28px;
 }
 
 .badge i {
-  color: #d4a373;
+  color: #2563eb;
 }
 
-
-/* =========================
+/* ======================================
    TITULO
-========================= */
+====================================== */
 
 .mensaje-titulo {
-  margin: 0 0 1rem;
 
-  font-size: clamp(2.2rem, 5vw, 4rem);
+  margin: 0;
 
-  line-height: 1.1;
+  font-size: clamp(2.3rem, 5vw, 3.8rem);
 
-  font-weight: 800;
+  color: #111827;
 
-  background: linear-gradient(
-    90deg,
-    #ffffff,
-    #f5d0a9,
-    #d4a373
-  );
+  line-height: 1.15;
 
-  background-clip: text;
-  -webkit-background-clip: text;
+  font-weight: 700;
 
-  -webkit-text-fill-color: transparent;
-  color: transparent;
 }
 
+/* ======================================
+   SUBTITULO
+====================================== */
 
 .mensaje-subtitulo {
+
   max-width: 650px;
 
-  margin: 0 auto 2.5rem;
+  margin: 24px auto 45px;
 
-  color: #eadbc9;
+  color: #6b7280;
 
-  font-size: 1.05rem;
+  line-height: 1.8;
 
-  line-height: 1.7;
+  font-size: 1.08rem;
+
 }
 
-
-/* =========================
+/* ======================================
    CARRUSEL
-========================= */
+====================================== */
 
 .versiculo-container {
+
   display: flex;
+
   align-items: center;
 
-  gap: 15px;
+  gap: 20px;
 
-  margin: 1rem auto;
 }
 
+/* ======================================
+   TARJETA DEL VERSICULO
+====================================== */
 
 .versiculo {
+
   flex: 1;
 
-  min-height: 230px;
+  min-height: 250px;
 
   display: flex;
+
   flex-direction: column;
+
   justify-content: center;
+
   align-items: center;
 
-  padding: 2rem 2.5rem;
+  padding: 45px;
 
-  border-radius: 24px;
+  border-radius: 22px;
 
-  background: rgba(250, 243, 231, 0.08);
+  background: #f9fafb;
 
-  border: 1px solid rgba(212, 163, 115, 0.25);
+  border: 1px solid #e5e7eb;
 
-  opacity: 1;
-  visibility: visible;
 }
 
-
-/* Animación al cambiar */
-
 .versiculo.cambiando {
-  animation: cambiarVersiculo 0.4s ease;
+  animation: cambiarVersiculo .35s ease;
 }
 
 @keyframes cambiarVersiculo {
 
-  0% {
-    opacity: 0.3;
-    transform: translateY(10px);
+  from {
+
+    opacity: .25;
+
+    transform: translateY(8px);
+
   }
 
-  100% {
+  to {
+
     opacity: 1;
+
     transform: translateY(0);
+
   }
 
 }
 
-
-/* =========================
+/* ======================================
    COMILLAS
-========================= */
+====================================== */
 
 .comillas {
+
   font-family: Georgia, serif;
 
   font-size: 5rem;
 
-  line-height: 0.6;
+  color: #2563eb;
 
-  color: #d4a373;
+  line-height: .7;
 
-  margin-bottom: 1.3rem;
+  margin-bottom: 18px;
+
 }
 
-
-/* =========================
-   TEXTO DEL VERSICULO
-========================= */
+/* ======================================
+   TEXTO
+====================================== */
 
 .texto-versiculo {
+
   max-width: 650px;
 
   margin: 0;
 
-  color: #fffaf3;
-
   font-family: Georgia, serif;
 
-  font-size: clamp(1.2rem, 2.5vw, 1.65rem);
-
-  line-height: 1.6;
-
   font-style: italic;
+
+  font-size: clamp(1.3rem, 2.5vw, 1.7rem);
+
+  color: #1f2937;
+
+  line-height: 1.8;
+
 }
 
-
-/* =========================
+/* ======================================
    REFERENCIA
-========================= */
+====================================== */
 
 .referencia {
-  margin-top: 1.2rem;
 
-  color: #e8bd8d;
+  margin-top: 22px;
 
-  font-size: 0.9rem;
+  color: #2563eb;
 
   font-weight: 700;
 
-  letter-spacing: 1px;
+  letter-spacing: .08em;
+
+  font-size: .9rem;
+
 }
 
-
-/* =========================
+/* ======================================
    FLECHAS
-========================= */
+====================================== */
 
 .flecha {
-  flex-shrink: 0;
 
   width: 48px;
-  height: 48px;
 
-  padding: 0;
+  height: 48px;
 
   border-radius: 50%;
 
-  border: 1px solid rgba(212, 163, 115, 0.35);
+  border: 1px solid #dbe3ea;
 
-  background: rgba(212, 163, 115, 0.12);
+  background: #fff;
 
-  color: #f5d0a9;
+  color: #2563eb;
 
   cursor: pointer;
 
   display: flex;
+
   justify-content: center;
+
   align-items: center;
 
-  font-family: Arial, sans-serif;
+  font-size: 1.8rem;
 
-  font-size: 2rem;
-  font-weight: 300;
+  transition: .25s;
 
-  line-height: 1;
+  box-shadow: 0 5px 15px rgba(0,0,0,.05);
 
-  transition:
-    background 0.25s ease,
-    transform 0.25s ease,
-    border-color 0.25s ease;
 }
 
-
 .flecha:hover {
-  background: rgba(212, 163, 115, 0.25);
 
-  border-color: rgba(212, 163, 115, 0.55);
+  background: #2563eb;
+
+  color: #fff;
 
   transform: scale(1.08);
 
-  color: #fff;
 }
-
 
 .flecha:active {
-  transform: scale(0.95);
+
+  transform: scale(.95);
+
 }
 
-
-/* Si seguís usando Bootstrap Icons */
-
-.flecha i {
-  font-size: 1.1rem;
-}
-
-
-/* =========================
+/* ======================================
    INDICADORES
-========================= */
+====================================== */
 
 .indicadores {
+
   display: flex;
 
   justify-content: center;
 
-  align-items: center;
+  gap: 8px;
 
-  gap: 7px;
+  margin-top: 24px;
 
-  margin-top: 1rem;
 }
 
-
 .indicadores span {
-  width: 8px;
-  height: 8px;
 
-  border-radius: 50%;
+  width: 9px;
 
-  background: rgba(255, 255, 255, 0.25);
+  height: 9px;
+
+  border-radius: 999px;
+
+  background: #cbd5e1;
 
   cursor: pointer;
 
-  transition:
-    width 0.3s ease,
-    background 0.3s ease;
-}
+  transition: .3s;
 
+}
 
 .indicadores span.activo {
-  width: 25px;
 
-  border-radius: 10px;
+  width: 28px;
 
-  background: #d4a373;
+  background: #2563eb;
+
 }
 
-
-/* =========================
-   MENSAJE FINAL
-========================= */
+/* ======================================
+   TEXTO ADICIONAL
+====================================== */
 
 .prrafo-adicional {
-  max-width: 600px;
 
-  margin: 2rem auto 1.3rem;
+  max-width: 620px;
 
-  color: #eadbc9;
+  margin: 40px auto 24px;
 
-  line-height: 1.7;
+  color: #4b5563;
+
+  line-height: 1.8;
+
 }
 
+/* ======================================
+   MENSAJE FINAL
+====================================== */
 
 .mensaje-final {
-  display: flex;
 
-  align-items: center;
+  display: flex;
 
   justify-content: center;
 
+  align-items: center;
+
   gap: 10px;
 
-  margin: 1.5rem auto;
+  margin-bottom: 30px;
 
-  color: #f5e7d5;
+  color: #374151;
 
-  font-size: 0.95rem;
 }
-
 
 .mensaje-final i {
-  color: #d4a373;
 
-  font-size: 1.3rem;
+  color: #2563eb;
+
+  font-size: 1.25rem;
+
 }
-
 
 .mensaje-final p {
+
   margin: 0;
+
 }
 
-
-/* =========================
-   BOTON PRINCIPAL
-========================= */
+/* ======================================
+   BOTON
+====================================== */
 
 .btn {
+
   display: inline-flex;
 
   align-items: center;
@@ -443,126 +422,122 @@
 
   gap: 10px;
 
-  margin-top: 1rem;
+  padding: 14px 28px;
 
-  padding: 0.9rem 1.7rem;
+  border-radius: 14px;
 
-  border: none;
+  background: #2563eb;
 
-  border-radius: 50px;
-
-  font-size: 1rem;
-
-  font-weight: 600;
+  color: white;
 
   text-decoration: none;
 
-  color: #fff;
+  font-weight: 600;
 
-  background: linear-gradient(
-    135deg,
-    #8b5e3c,
-    #b77b4d
-  );
+  transition: .25s;
 
-  box-shadow:
-    0 10px 30px rgba(139, 94, 60, 0.35);
+  box-shadow: 0 10px 30px rgba(37,99,235,.18);
 
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    background 0.3s ease;
 }
-
 
 .btn:hover {
-  color: #fff;
 
-  transform: translateY(-3px);
+  background: #1d4ed8;
 
-  background: linear-gradient(
-    135deg,
-    #9b6a45,
-    #c58b5b
-  );
+  color: white;
 
-  box-shadow:
-    0 15px 35px rgba(212, 163, 115, 0.35);
+  transform: translateY(-2px);
+
 }
 
-
-/* =========================
+/* ======================================
    FOOTER
-========================= */
+====================================== */
 
 footer {
-  position: relative;
 
-  z-index: 2;
+  margin-top: 40px;
 
-  margin-top: 2rem;
+  color: #94a3b8;
 
-  color: rgba(255, 239, 220, 0.45);
+  font-size: .85rem;
 
-  font-size: 0.75rem;
 }
 
-
-/* =========================
+/* ======================================
    MOBILE
-========================= */
+====================================== */
 
-@media (max-width: 600px) {
+@media (max-width:700px){
 
-  .llamamiento-container {
-    padding: 1.2rem;
+  .llamamiento-container{
+
+    padding:40px 16px;
+
   }
 
+  .mensaje-box{
 
-  .mensaje-box {
-    padding: 2.3rem 1.2rem;
+    padding:35px 22px;
 
-    border-radius: 24px;
+    border-radius:22px;
+
   }
 
+  .mensaje-titulo{
 
-  .mensaje-subtitulo {
-    font-size: 0.95rem;
+    font-size:2rem;
+
   }
 
+  .mensaje-subtitulo{
 
-  .versiculo-container {
-    gap: 5px;
+    font-size:1rem;
+
   }
 
+  .versiculo-container{
 
-  .versiculo {
-    min-height: 280px;
+    gap:8px;
 
-    padding: 1.5rem 1rem;
   }
 
+  .versiculo{
 
-  .texto-versiculo {
-    font-size: 1.15rem;
+    min-height:280px;
+
+    padding:28px 18px;
+
   }
 
+  .texto-versiculo{
 
-  .flecha {
-    width: 38px;
-    height: 38px;
+    font-size:1.2rem;
 
-    font-size: 1.7rem;
   }
 
+  .flecha{
 
-  .mensaje-final {
-    font-size: 0.85rem;
+    width:40px;
+
+    height:40px;
+
   }
 
+  .mensaje-final{
 
-  .btn {
-    width: 100%;
+    flex-direction:column;
+
+    gap:8px;
+
+    font-size:.95rem;
+
+  }
+
+  .btn{
+
+    width:100%;
+
   }
 
 }

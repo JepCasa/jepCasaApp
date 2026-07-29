@@ -9,6 +9,7 @@ export interface TarjetaActividadData {
   colorTitulo?: string;
   enlaceInstagram?: string;
   enlaceMapa?: string;
+  boton?: string;
 }
 
 @Component({
