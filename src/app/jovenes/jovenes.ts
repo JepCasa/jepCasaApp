@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { JovenesService } from './service/jovenes.service';
@@ -119,7 +119,8 @@ export class Jovenes implements OnInit {
 
   constructor(
     private jovenesService: JovenesService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private ngZone: NgZone
   ) { }
 
   // =========================
@@ -174,6 +175,8 @@ export class Jovenes implements OnInit {
     porcentaje: 50
   };
 
+  equipoSeleccionadoMobile: number = 1;
+
   // =========================
   // ESTUDIOS
   // =========================
@@ -209,16 +212,11 @@ export class Jovenes implements OnInit {
   // =========================
 
   async ngOnInit() {
-
     await this.cargarTodo();
-
   }
 
   async cargarTodo() {
-
     try {
-
-
       const [
         configuracion,
         usuarios,
@@ -226,41 +224,24 @@ export class Jovenes implements OnInit {
         estudios,
         respuestas,
         reacciones
-
       ] = await Promise.all([
-
         this.jovenesService.obtenerConfiguracion(),
-
         this.jovenesService.obtenerUsuarios(),
-
         this.jovenesService.obtenerLibros(),
-
         this.jovenesService.obtenerEstudios(),
-
         this.jovenesService.obtenerRespuestas(),
-
         this.jovenesService.obtenerReacciones()
-
       ]);
-
-
 
       // =========================
       // USUARIOS
       // =========================
 
       this.usuarios = usuarios.map(u => ({
-
         id: Number(u.id),
-
         nombre: u.nombre,
-
         equipo: Number(u.equipo)
-
       }));
-
-
-
 
       // =========================
       // LIBROS
@@ -268,123 +249,62 @@ export class Jovenes implements OnInit {
 
 
       this.libros = libros.map(l => ({
-
         año: Number(l.año),
-
         mes: Number(l.mes),
-
         libro: l.libro,
-
         informacion: l.informacion,
-
         pregunta1: l.pregunta1,
-
         pregunta2: l.pregunta2,
-
         pregunta3: l.pregunta3
-
       }));
-
-
-
 
       // =========================
       // CONFIG
       // =========================
 
-
       const config = configuracion[0];
 
-
       this.configuracion = {
-
         anio: Number(config.anio),
-
         libro: "",
-
         equipo1: config.equipo1,
-
         equipo2: config.equipo2,
-
         puntos_responder: Number(config.puntos_responder),
-
         puntos_corazon: Number(config.puntos_corazon)
-
       };
-
-
 
       this.equipo1.nombre =
         this.configuracion.equipo1;
 
-
       this.equipo2.nombre =
         this.configuracion.equipo2;
-
-
-
 
       // =========================
       // ESTUDIOS
       // =========================
 
-
       this.estudiosOriginales = estudios.map(e => {
-
-
         const usuario = this.usuarios.find(u =>
-
           u.id === Number(e.joven_id)
-
         );
 
-
         return {
-
-
           id: Number(e.id),
-
-
           mes: Number(e.mes),
-
-
           fecha: e.fecha,
-
-
           joven: usuario?.nombre ?? "Sin nombre",
-
-
           equipo: usuario?.equipo ?? 0,
-
-
           pasaje: e.pasaje,
-
-
           estado: e.estado
-
-
         };
-
 
       });
 
-
-
       this.respuestas = respuestas;
-
       this.reacciones = reacciones;
-
-
-
-
       console.log("DATOS LISTOS");
-
-
       console.log(this.libros);
-
       console.log(this.estudiosOriginales);
-
-
 
       // IMPORTANTE
       // cargar el mes actual recién cuando TODO existe
@@ -395,27 +315,22 @@ export class Jovenes implements OnInit {
 
       this.cdr.detectChanges();
 
-
     }
 
     catch (error) {
-
       console.error(
         "Error cargando datos:",
         error
       );
-
     }
+  }
 
-
+  seleccionarEquipoMobile(equipo: number) {
+    this.equipoSeleccionadoMobile = equipo;
   }
 
   cambiarMes(mes: number) {
-
-
     this.mesSeleccionado = mes;
-
-
 
     this.libroActual =
       this.libros.find(l =>
@@ -425,25 +340,17 @@ export class Jovenes implements OnInit {
 
       ) ?? null;
 
-
-
     this.configuracion.libro =
       this.libroActual?.libro ?? "";
-
-
 
     this.estudios =
       this.estudiosOriginales.filter(e =>
         e.mes === mes
       );
 
-
-
     this.filtrarEquipos();
 
     this.calcularRanking();
-
-
 
     console.log(
       "MES CARGADO",
@@ -451,47 +358,35 @@ export class Jovenes implements OnInit {
       this.libroActual,
       this.estudios
     );
-
   }
 
   verInfoLibro() {
-
     alert(this.libroActual?.informacion);
-
   }
   // =========================
   // FILTRO
   // =========================
 
   filtrarEquipos() {
-
     const texto =
       this.textoBusqueda.toLowerCase();
 
-
     const lista =
       this.estudios.filter(e =>
-
         (e.joven ?? "")
           .toLowerCase()
           .includes(texto)
-
       );
-
 
     this.estudiosEquipo1 =
       lista.filter(e => e.equipo === 1);
 
-
     this.estudiosEquipo2 =
       lista.filter(e => e.equipo === 2);
-
   }
 
   buscar() {
-
     this.filtrarEquipos();
-
   }
 
   // =========================
@@ -504,26 +399,20 @@ export class Jovenes implements OnInit {
     let puntos2 = 0;
 
     this.estudios.forEach(estudio => {
-
       if (estudio.estado !== 'Respondida') {
         return;
       }
-
       const puntos = this.calcularPuntos(estudio);
-
       if (estudio.equipo === 1) {
         puntos1 += puntos;
       }
-
       if (estudio.equipo === 2) {
         puntos2 += puntos;
       }
-
     });
 
     this.equipo1.puntos = puntos1;
     this.equipo2.puntos = puntos2;
-
     const total = puntos1 + puntos2;
 
     if (total > 0) {
@@ -540,7 +429,6 @@ export class Jovenes implements OnInit {
       this.equipo2.porcentaje = 50;
 
     }
-
   }
 
   // =========================
@@ -552,7 +440,6 @@ export class Jovenes implements OnInit {
     if (this.estudioEnEdicion === estudio.id) {
 
       this.estudioEnEdicion = null;
-
       return;
 
     }
@@ -599,35 +486,65 @@ export class Jovenes implements OnInit {
 
       const fecha = this.fechaHoy();
 
+      console.log('Guardando respuesta...');
+
       await this.jovenesService.guardarRespuesta({
         estudio_id: estudio.id,
         texto,
         fecha
       });
 
-      this.actualizarRespuestaLocal(estudio, texto, fecha);
+      console.log('Respuesta guardada en servidor');
 
-      this.estudioEnEdicion = null;
+      // ==========================================
+      // VOLVER AL CONTEXTO DE ANGULAR
+      // ==========================================
 
-      this.calcularRanking();
+      this.ngZone.run(() => {
+
+        // Actualizamos el estudio
+        this.actualizarRespuestaLocal(
+          estudio,
+          texto,
+          fecha
+        );
+
+        // Cerramos el editor
+        this.estudioEnEdicion = null;
+
+        // Recalculamos puntos
+        this.calcularRanking();
+
+        // Terminó de guardar
+        this.guardandoRespuesta = false;
+
+        console.log('Estado actualizado:', estudio.estado);
+
+        // Forzamos detección
+        this.cdr.detectChanges();
+
+      });
 
     } catch (error) {
 
       console.error(
-        "Error guardando la respuesta:",
+        'Error guardando la respuesta:',
         error
       );
 
-      alert(
-        "No se pudo guardar la respuesta. Revisá la conexión y probá de nuevo."
-      );
+      this.ngZone.run(() => {
 
-    } finally {
+        this.guardandoRespuesta = false;
 
-      this.guardandoRespuesta = false;
+        this.cdr.detectChanges();
+
+        alert(
+          'No se pudo guardar la respuesta. Revisá la conexión y probá de nuevo.'
+        );
+
+      });
 
     }
-
   }
 
   private actualizarRespuestaLocal(
@@ -636,10 +553,12 @@ export class Jovenes implements OnInit {
     fecha: string
   ) {
 
+    // Marcar como respondida
     estudio.estado = 'Respondida';
 
-    const respuesta = this.respuestas.find(r =>
-      Number(r.estudio_id) === estudio.id
+    // Buscar si ya existe la respuesta
+    const respuesta = this.respuestas.find(
+      r => Number(r.estudio_id) === estudio.id
     );
 
     if (respuesta) {
@@ -687,6 +606,12 @@ export class Jovenes implements OnInit {
 
     return `${dia}/${mes}/${hoy.getFullYear()}`;
 
+  }
+
+  capitalizarFecha(fecha: string): string {
+    if (!fecha) return '';
+
+    return fecha.charAt(0).toUpperCase() + fecha.slice(1);
   }
 
 }

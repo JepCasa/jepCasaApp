@@ -465,3 +465,144 @@
 
 
 }
+
+/* ========================================
+   SELECTOR DE EQUIPOS MOBILE
+======================================== */
+
+.selector-equipos-mobile {
+    display: none;
+}
+
+
+/* TÍTULO DEL EQUIPO EN MOBILE */
+
+.titulo-equipo-mobile {
+    display: none;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media(max-width:768px) {
+
+    .titulo {
+        font-size: 1.5rem;
+    }
+
+    .team-header {
+        display: none;
+        margin-bottom: 15px;
+    }
+
+    .estudio-card {
+        margin-bottom: 1rem;
+    }
+
+    .estudio-card .btn {
+        width: 100%;
+    }
+
+
+    /* ==============================
+       SELECTOR EQUIPO 1 / EQUIPO 2
+    ============================== */
+
+    .selector-equipos-mobile {
+        display: flex;
+        gap: 8px;
+        width: 100%;
+        padding: 5px;
+
+        background: #020617;
+        border: 1px solid rgba(255, 255, 255, .08);
+        border-radius: 14px;
+    }
+
+    .selector-equipos-mobile .btn {
+        flex: 1;
+
+        border: none;
+        border-radius: 10px;
+
+        padding: 12px 8px;
+
+        background: transparent;
+        color: #94a3b8;
+
+        font-weight: 600;
+
+        transition: .2s;
+    }
+
+    .selector-equipos-mobile .btn span {
+        display: block;
+
+        font-size: .75rem;
+        margin-top: 3px;
+
+        opacity: .8;
+    }
+
+
+    /* EQUIPO SELECCIONADO */
+
+    .selector-equipos-mobile .btn.activo {
+        background: #2563eb;
+        color: white;
+
+        box-shadow: 0 4px 12px rgba(37, 99, 235, .3);
+    }
+
+
+    /* ==============================
+       COLUMNAS
+    ============================== */
+
+    .equipo-columna {
+        width: 100%;
+    }
+
+
+    /* Ocultar equipo que no está seleccionado */
+
+    .equipo-columna.mobile-oculto {
+        display: none;
+    }
+
+
+    /* ==============================
+       TÍTULO DEL EQUIPO
+    ============================== */
+
+    .titulo-equipo-mobile {
+        display: flex;
+
+        justify-content: space-between;
+        align-items: center;
+
+        margin-bottom: 15px;
+
+        padding: 12px 15px;
+
+        background: rgba(30, 41, 59, .75);
+
+        border-radius: 12px;
+
+        border: 1px solid rgba(255, 255, 255, .06);
+
+        color: white;
+    }
+
+    .titulo-equipo-mobile span {
+        font-weight: 600;
+    }
+
+    .titulo-equipo-mobile strong {
+        color: #facc15;
+        font-size: .9rem;
+    }
+
+}

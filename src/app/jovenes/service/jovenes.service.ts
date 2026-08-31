@@ -93,16 +93,21 @@ export class JovenesService {
 
         const respuesta = await fetch(GUARDAR_RESPUESTA_URL, {
             method: 'POST',
-            // text/plain evita el preflight CORS y Apps Script igual
-            // recibe el JSON en e.postData.contents.
+
             headers: {
                 'Content-Type': 'text/plain;charset=utf-8'
             },
+
             body: JSON.stringify(datos)
         });
 
-        return respuesta.json();
+        if (!respuesta.ok) {
+            throw new Error(
+                `Error HTTP: ${respuesta.status}`
+            );
+        }
 
+        return await respuesta.json();
     }
 
 }

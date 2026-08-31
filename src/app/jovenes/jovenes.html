@@ -14,9 +14,7 @@
         <div class="mt-3 d-flex justify-content-center gap-2 flex-wrap">
 
             <button class="btn btn-warning" (click)="verInfoLibro()">
-
                 📖 Ver info
-
             </button>
 
             <button class="btn btn-warning">
@@ -151,7 +149,7 @@
                 </p>
 
                 <small>
-                    {{estudio.fecha}}
+                    {{ capitalizarFecha(estudio.fecha) }}
                 </small>
 
                 <!-- Respuesta guardada -->
@@ -174,8 +172,7 @@
 
                 <div class="mt-3 d-flex justify-content-center gap-2 flex-wrap">
 
-                    <button class="btn btn-success" [disabled]="guardandoRespuesta"
-                        (click)="guardarRespuesta(estudio)">
+                    <button class="btn btn-success" [disabled]="guardandoRespuesta" (click)="guardarRespuesta(estudio)">
 
                         {{ guardandoRespuesta ? 'Guardando...' : 'Guardar respuesta' }}
 
@@ -225,31 +222,63 @@
 
     </ng-template>
 
+    <!-- SELECTOR DE EQUIPO - SOLO MOBILE -->
+
+    <div class="selector-equipos-mobile mb-4">
+
+        <button class="btn" [class.activo]="equipoSeleccionadoMobile === 1" (click)="seleccionarEquipoMobile(1)">
+            {{ equipo1.nombre }}
+            <span>{{ equipo1.puntos }} pts</span>
+        </button>
+
+        <button class="btn" [class.activo]="equipoSeleccionadoMobile === 2" (click)="seleccionarEquipoMobile(2)">
+            {{ equipo2.nombre }}
+            <span>{{ equipo2.puntos }} pts</span>
+        </button>
+
+    </div>
+
+
     <!-- EQUIPOS -->
 
     <div class="row">
 
         <!-- EQUIPO 1 -->
 
-        <div class="col-lg-6">
+        <div class="col-lg-6 equipo-columna" [class.mobile-oculto]="equipoSeleccionadoMobile !== 1">
+
+            <!-- Título solo visible en mobile -->
+
+            <div class="titulo-equipo-mobile">
+                <span>{{ equipo1.nombre }}</span>
+                <strong>{{ equipo1.puntos }} pts</strong>
+            </div>
 
             @for(estudio of estudiosEquipo1; track estudio.id){
 
-            <ng-template [ngTemplateOutlet]="estudioCard"
-                [ngTemplateOutletContext]="{ $implicit: estudio }"></ng-template>
+            <ng-template [ngTemplateOutlet]="estudioCard" [ngTemplateOutletContext]="{ $implicit: estudio }">
+            </ng-template>
 
             }
 
         </div>
 
+
         <!-- EQUIPO 2 -->
 
-        <div class="col-lg-6">
+        <div class="col-lg-6 equipo-columna" [class.mobile-oculto]="equipoSeleccionadoMobile !== 2">
+
+            <!-- Título solo visible en mobile -->
+
+            <div class="titulo-equipo-mobile">
+                <span>{{ equipo2.nombre }}</span>
+                <strong>{{ equipo2.puntos }} pts</strong>
+            </div>
 
             @for(estudio of estudiosEquipo2; track estudio.id){
 
-            <ng-template [ngTemplateOutlet]="estudioCard"
-                [ngTemplateOutletContext]="{ $implicit: estudio }"></ng-template>
+            <ng-template [ngTemplateOutlet]="estudioCard" [ngTemplateOutletContext]="{ $implicit: estudio }">
+            </ng-template>
 
             }
 
