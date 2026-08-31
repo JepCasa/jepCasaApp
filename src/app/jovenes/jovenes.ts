@@ -52,29 +52,131 @@ interface FechaComparable {
   anio: number;
 }
 
-function parsearFecha(fecha: string, anioReferencia: number): FechaComparable | null {
+// function parsearFecha(fecha: string, anioReferencia: number): FechaComparable | null {
 
-  const partes = fecha.split('/').map(n => parseInt(n, 10));
+//   const partes = fecha.split('/').map(n => parseInt(n, 10));
 
-  let dia: number;
-  let mes: number;
-  let anio: number;
+//   let dia: number;
+//   let mes: number;
+//   let anio: number;
+
+//   if (partes.length === 3) {
+//     [dia, mes, anio] = partes;
+//   } else if (partes.length === 2) {
+//     [dia, mes] = partes;
+//     anio = anioReferencia;
+//   } else {
+//     return null;
+//   }
+
+//   if (!dia || !mes || dia < 1 || dia > 31 || mes < 1 || mes > 12) {
+//     return null;
+//   }
+
+//   return { dia, mes, anio };
+
+// }
+
+function parsearFecha(
+  fecha: string,
+  anioReferencia: number
+): FechaComparable | null {
+
+  if (!fecha) {
+    return null;
+  }
+
+  const texto = fecha
+    .toLowerCase()
+    .trim();
+
+  const meses: Record<string, number> = {
+    enero: 1,
+    febrero: 2,
+    marzo: 3,
+    abril: 4,
+    mayo: 5,
+    junio: 6,
+    julio: 7,
+    agosto: 8,
+    septiembre: 9,
+    octubre: 10,
+    noviembre: 11,
+    diciembre: 12
+  };
+
+  // Formato:
+  // "domingo, 30 de agosto de 2026"
+  const match = texto.match(
+    /(\d{1,2})\s+de\s+([a-záéíóú]+)\s+de\s+(\d{4})/
+  );
+
+  if (match) {
+    const dia = Number(match[1]);
+    const mes = meses[match[2]];
+    const anio = Number(match[3]);
+
+    if (!mes) {
+      return null;
+    }
+
+    return {
+      dia,
+      mes,
+      anio
+    };
+  }
+
+  // Formato DD/MM/YYYY
+  const partes = texto
+    .split('/')
+    .map(n => parseInt(n, 10));
 
   if (partes.length === 3) {
-    [dia, mes, anio] = partes;
-  } else if (partes.length === 2) {
-    [dia, mes] = partes;
-    anio = anioReferencia;
-  } else {
-    return null;
+    const [dia, mes, anio] = partes;
+
+    if (
+      !dia ||
+      !mes ||
+      !anio ||
+      dia < 1 ||
+      dia > 31 ||
+      mes < 1 ||
+      mes > 12
+    ) {
+      return null;
+    }
+
+    return {
+      dia,
+      mes,
+      anio
+    };
   }
 
-  if (!dia || !mes || dia < 1 || dia > 31 || mes < 1 || mes > 12) {
-    return null;
+  // Formato DD/MM
+  if (partes.length === 2) {
+    const [dia, mes] = partes;
+
+    if (
+      !dia ||
+      !mes ||
+      dia < 1 ||
+      dia > 31 ||
+      mes < 1 ||
+      mes > 12
+    ) {
+      return null;
+    }
+
+    return {
+      dia,
+      mes,
+      anio: anioReferencia
+    };
   }
 
-  return { dia, mes, anio };
-
+  return null;
 }
 
 function puntosSegunFechas(fechaEstudio: string, fechaRespuesta: string): number {
@@ -448,27 +550,19 @@ export class Jovenes implements OnInit {
 
     const hoy = new Date();
 
-    // Fecha de hoy en formato comparable
-    const hoyComparable: FechaComparable = {
-      dia: hoy.getDate(),
-      mes: hoy.getMonth() + 1,
-      anio: hoy.getFullYear()
-    };
+    const fechaEstudioNumero =
+      fechaEstudio.anio * 10000 +
+      fechaEstudio.mes * 100 +
+      fechaEstudio.dia;
 
-    // No se puede responder antes de la fecha asignada
-    const fechaEstudioDate = new Date(
-      fechaEstudio.anio,
-      fechaEstudio.mes - 1,
-      fechaEstudio.dia
-    );
+    const hoyNumero =
+      hoy.getFullYear() * 10000 +
+      (hoy.getMonth() + 1) * 100 +
+      hoy.getDate();
 
-    const hoyDate = new Date(
-      hoyComparable.anio,
-      hoyComparable.mes - 1,
-      hoyComparable.dia
-    );
-
-    return hoyDate >= fechaEstudioDate;
+    // Se puede responder hoy o cualquier fecha anterior.
+    // Solo se bloquean fechas futuras.
+    return fechaEstudioNumero <= hoyNumero;
   }
 
   abrirEdicion(estudio: Estudio) {
