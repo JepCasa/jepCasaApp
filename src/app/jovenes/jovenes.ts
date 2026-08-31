@@ -509,6 +509,9 @@ export class Jovenes implements OnInit {
           fecha
         );
 
+        // 🔊 REPRODUCIR CELEBRACIÓN
+        this.reproducirCelebracion();
+
         // Cerramos el editor
         this.estudioEnEdicion = null;
 
@@ -545,6 +548,13 @@ export class Jovenes implements OnInit {
       });
 
     }
+  }
+
+  reproducirCelebracion(): void {
+    const audio = new Audio('assets/sounds/festejo.mp3');
+    audio.play().catch(error => {
+      console.error('No se pudo reproducir el audio:', error);
+    });
   }
 
   private actualizarRespuestaLocal(
