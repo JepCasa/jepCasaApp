@@ -435,7 +435,49 @@ export class Jovenes implements OnInit {
   // RESPUESTAS
   // =========================
 
+  private puedeResponder(estudio: Estudio): boolean {
+
+    const fechaEstudio = parsearFecha(
+      estudio.fecha,
+      this.configuracion.anio
+    );
+
+    if (!fechaEstudio) {
+      return false;
+    }
+
+    const hoy = new Date();
+
+    // Fecha de hoy en formato comparable
+    const hoyComparable: FechaComparable = {
+      dia: hoy.getDate(),
+      mes: hoy.getMonth() + 1,
+      anio: hoy.getFullYear()
+    };
+
+    // No se puede responder antes de la fecha asignada
+    const fechaEstudioDate = new Date(
+      fechaEstudio.anio,
+      fechaEstudio.mes - 1,
+      fechaEstudio.dia
+    );
+
+    const hoyDate = new Date(
+      hoyComparable.anio,
+      hoyComparable.mes - 1,
+      hoyComparable.dia
+    );
+
+    return hoyDate >= fechaEstudioDate;
+  }
+
   abrirEdicion(estudio: Estudio) {
+
+    // No permitir responder antes de la fecha correspondiente
+    if (!this.puedeResponder(estudio)) {
+      alert(`Todavía no podés responder este estudio. Te corresponde el ${estudio.fecha}.`);
+      return;
+    }
 
     if (this.estudioEnEdicion === estudio.id) {
 
