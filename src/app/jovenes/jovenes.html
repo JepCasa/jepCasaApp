@@ -34,28 +34,72 @@
 
 </div>
 
-} @else {<div class="container py-4">
+} @else {
+<div class="container py-4">
 
     <!-- CABECERA -->
 
     <div class="text-center mb-4">
 
-        <span class="badge bg-secondary fs-6">{{ configuracion.anio }}</span>
+        <span class="badge bg-secondary fs-6">
+            {{ configuracion.anio }}
+        </span>
 
         <h2 class="titulo mt-2">
-            Estudio Jóvenes Jep
-            - {{ libroActual?.libro ?? 'Cargando...' }}
+
+            Estudio Jóvenes Jep -
+
+            <span class="libro-titulo">
+
+                {{ libroActual?.libro ?? 'Cargando...' }}
+
+                <button class="btn-info-libro" (click)="verInfoLibro()" aria-label="Información del libro"
+                    title="Ver información">
+
+                    i
+
+                </button>
+
+            </span>
+
         </h2>
 
-        <div class="mt-3 d-flex justify-content-center gap-2 flex-wrap">
+        <!-- REGLAS DE PUNTUACIÓN -->
 
-            <button class="btn btn-warning" (click)="verInfoLibro()">
-                📖 Ver info
-            </button>
+        <div class="reglas-puntuacion mt-4">
 
-            <button class="btn btn-warning">
-                🏆 Ranking
-            </button>
+            <div class="reglas-titulo">
+                <span>🏆</span>
+                <strong>Reglas de puntuación</strong>
+            </div>
+
+            <div class="reglas-items">
+
+                <div class="regla">
+                    <span class="regla-icon">📅</span>
+                    <div>
+                        <strong>50 pts</strong>
+                        <small>Día asignado</small>
+                    </div>
+                </div>
+
+                <div class="regla">
+                    <span class="regla-icon">📆</span>
+                    <div>
+                        <strong>35 pts</strong>
+                        <small>Otro día del mismo mes</small>
+                    </div>
+                </div>
+
+                <div class="regla">
+                    <span class="regla-icon">⏳</span>
+                    <div>
+                        <strong>10 pts</strong>
+                        <small>En otro mes</small>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
 
@@ -323,4 +367,90 @@
     </div>
 
 </div>
+
+<!-- MODAL ESTUDIO NO DISPONIBLE -->
+
+@if (mostrarAvisoFecha) {
+
+<div class="modal-aviso-overlay" (click)="cerrarAvisoFecha()">
+
+    <div class="modal-aviso" (click)="$event.stopPropagation()">
+
+        <!-- ICONO -->
+
+        <div class="modal-aviso-icon">
+            🔒
+        </div>
+
+        <!-- TITULO -->
+
+        <h3>
+            Estudio no disponible todavía
+        </h3>
+
+        <p class="modal-aviso-texto">
+            Este estudio todavía no está habilitado para responder.
+        </p>
+
+        <!-- FECHA -->
+
+        <div class="fecha-asignada">
+
+            <span>📅</span>
+
+            <div>
+                <small>Te corresponde responderlo el</small>
+
+                <strong>
+                    {{ capitalizarFecha(estudioBloqueado?.fecha) }}
+                </strong>
+            </div>
+
+        </div>
+
+        <!-- BOTON -->
+
+        <button class="btn btn-warning btn-entendido" (click)="cerrarAvisoFecha()">
+
+            Entendido
+
+        </button>
+
+    </div>
+
+</div>
+
+}
+
+@if (mostrarInfoLibro) {
+
+<div class="modal-info-overlay" (click)="cerrarInfoLibro()">
+
+    <div class="modal-info" (click)="$event.stopPropagation()">
+
+        <div class="info-icon">
+            📖
+        </div>
+
+        <h3>
+            {{ libroActual?.libro }}
+        </h3>
+
+        <div class="info-contenido">
+
+            {{ libroActual?.informacion }}
+
+        </div>
+
+        <button class="btn btn-warning btn-cerrar-info" (click)="cerrarInfoLibro()">
+
+            Entendido
+
+        </button>
+
+    </div>
+
+</div>
+
+}
 }

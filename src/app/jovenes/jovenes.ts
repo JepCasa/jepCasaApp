@@ -312,6 +312,9 @@ export class Jovenes implements OnInit {
 
   cargando = true;
   errorCarga = false;
+
+  mostrarAvisoFecha = false;
+  estudioBloqueado: any = null;
   // =========================
   // INIT
   // =========================
@@ -487,8 +490,14 @@ export class Jovenes implements OnInit {
     );
   }
 
-  verInfoLibro() {
-    alert(this.libroActual?.informacion);
+  mostrarInfoLibro = false;
+
+  verInfoLibro(): void {
+    this.mostrarInfoLibro = true;
+  }
+
+  cerrarInfoLibro(): void {
+    this.mostrarInfoLibro = false;
   }
   // =========================
   // FILTRO
@@ -594,7 +603,8 @@ export class Jovenes implements OnInit {
 
     // No permitir responder antes de la fecha correspondiente
     if (!this.puedeResponder(estudio)) {
-      alert(`Todavía no podés responder este estudio. Te corresponde el ${estudio.fecha}.`);
+      this.estudioBloqueado = estudio;
+      this.mostrarAvisoFecha = true;
       return;
     }
 
@@ -617,9 +627,12 @@ export class Jovenes implements OnInit {
   }
 
   cerrarEdicion() {
-
     this.estudioEnEdicion = null;
+  }
 
+  cerrarAvisoFecha(): void {
+    this.mostrarAvisoFecha = false;
+    this.estudioBloqueado = null;
   }
 
   textoDeRespuesta(estudio: Estudio): string {
