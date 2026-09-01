@@ -335,8 +335,7 @@ export class Jovenes implements OnInit {
         usuarios,
         libros,
         estudios,
-        respuestas,
-        reacciones
+        respuestas 
       ] = await Promise.all([
 
         this.jovenesService.obtenerConfiguracion(),
@@ -348,8 +347,6 @@ export class Jovenes implements OnInit {
         this.jovenesService.obtenerEstudios(),
 
         this.jovenesService.obtenerRespuestas(),
-
-        this.jovenesService.obtenerReacciones()
 
       ]);
 
@@ -425,7 +422,6 @@ export class Jovenes implements OnInit {
       // =====================================================
 
       this.respuestas = respuestas;
-      this.reacciones = reacciones;
 
       // =====================================================
       // MES ACTUAL

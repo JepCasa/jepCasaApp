@@ -13,14 +13,39 @@ const ESTUDIOS_URL =
 const RESPUESTAS_URL =
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vQa8O7nOCaXJpSlIVswn9o4zOy7zIWPBijwc8TDhPx7VAMzFFmpQcqo0UkPHXcOAj6bgz2L0oyFw9_I/pub?gid=1503286462&single=true&output=csv';
 
-    const LIBROS_URL =
+const REACCIONES_URL =
+    'https://docs.google.com/spreadsheets/d/e/2PACX-1vQa8O7nOCaXJpSlIVswn9o4zOy7zIWPBijwc8TDhPx7VAMzFFmpQcqo0UkPHXcOAj6bgz2L0oyFw9_I/pub?gid=50102099&single=true&output=csv';
+
+const LIBROS_URL =
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vQa8O7nOCaXJpSlIVswn9o4zOy7zIWPBijwc8TDhPx7VAMzFFmpQcqo0UkPHXcOAj6bgz2L0oyFw9_I/pub?gid=900325381&single=true&output=csv';
 
 const GUARDAR_RESPUESTA_URL =
     'https://script.google.com/macros/s/AKfycbxENC9MSO_7Pq-OQvEZlnoFZVrS3G-jblIEr-oQaiG4Q7YgarmJGK6hC5QK2Z39GuHl/exec';
 
+// =========================================================
+// PROTECCIÓN CONTRA CUELGUES / FALLOS TRANSITORIOS
+// =========================================================
+
+/**
+ * Tiempo máximo que esperamos una respuesta de Google Sheets
+ * antes de considerar que la petición falló.
+ *
+ * Sin esto, si Papa Parse nunca dispara "complete" ni "error"
+ * (conexión colgada, DNS lento, etc.), la Promise queda pendiente
+ * para siempre y bloquea Promise.all() en el componente.
+ */
 const TIMEOUT_DESCARGA_MS = 15000;
+
+/**
+ * Reintentos adicionales (además del primer intento) antes
+ * de darnos por vencidos con una hoja de cálculo.
+ */
 const MAX_REINTENTOS = 2;
+
+/**
+ * Espera base entre reintentos. Se multiplica por el número
+ * de intento (backoff simple).
+ */
 const ESPERA_ENTRE_REINTENTOS_MS = 1200;
 
 export interface RespuestaParaGuardar {
@@ -59,26 +84,14 @@ export class JovenesService {
     // CSV
     // =========================================================
 
-    // private descargarCSV(url: string): Promise<any[]> {
-
-    //     return new Promise((resolve, reject) => {
-
-    //         Papa.parse(url, {
-    //             download: true,
-    //             header: true,
-    //             skipEmptyLines: true,
-
-    //             complete: (resultado) => {
-    //                 resolve(resultado.data as any[]);
-    //             },
-
-    //             error: (error) => {
-    //                 reject(error);
-    //             }
-    //         });
-
-    //     });
-    // }
+    /**
+     * Descarga y parsea un CSV con Papa Parse.
+     *
+     * IMPORTANTE: incluye un timeout manual. Si Papa Parse no
+     * dispara "complete" ni "error" dentro de TIMEOUT_DESCARGA_MS,
+     * esta Promise se rechaza igual, para no quedar pendiente
+     * indefinidamente.
+     */
     private descargarCSV(url: string): Promise<any[]> {
 
         return new Promise((resolve, reject) => {
@@ -133,6 +146,11 @@ export class JovenesService {
 
         });
     }
+
+    /**
+     * Igual que descargarCSV(), pero con reintentos automáticos
+     * ante fallos transitorios (timeout, error de red, etc.).
+     */
     private async descargarCSVConReintentos(url: string): Promise<any[]> {
 
         let ultimoError: any;
@@ -169,6 +187,7 @@ export class JovenesService {
     private esperar(ms: number): Promise<void> {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
+
     // =========================================================
     // CACHE
     // =========================================================
@@ -276,7 +295,7 @@ export class JovenesService {
         }
 
         // -------------------------------------------------------
-        // 3. DESCARGAR
+        // 3. DESCARGAR (con timeout y reintentos)
         // -------------------------------------------------------
 
         const request = this.descargarCSVConReintentos(url)
@@ -326,11 +345,11 @@ export class JovenesService {
             return;
         }
 
-        const request = this.descargarCSV(url)
+        const request = this.descargarCSVConReintentos(url)
             .then(data => {
 
                 console.log(
-                    '🌐 Datos descargados:',
+                    '🌐 Datos actualizados en segundo plano:',
                     cacheKey
                 );
 
@@ -342,13 +361,39 @@ export class JovenesService {
                 return data;
 
             })
+            .catch(error => {
+
+                /**
+                 * Si la actualización silenciosa falla, no rompemos
+                 * nada: el usuario ya tiene datos válidos del cache.
+                 * Solo lo dejamos registrado en consola.
+                 */
+                console.warn(
+                    '⚠️ No se pudo actualizar en segundo plano:',
+                    cacheKey,
+                    error
+                );
+
+                return [] as any[];
+
+            })
             .finally(() => {
 
                 this.requestsEnCurso.delete(cacheKey);
 
             });
 
-        this.requestsEnCurso.set(cacheKey, request);
+        /**
+         * BUGFIX: antes esta request nunca se registraba acá,
+         * así que dos actualizaciones silenciosas del mismo
+         * cacheKey podían dispararse en paralelo sin que
+         * requestsEnCurso lo evitara.
+         */
+        this.requestsEnCurso.set(
+            cacheKey,
+            request
+        );
+
     }
 
     // =========================================================
@@ -380,6 +425,13 @@ export class JovenesService {
         return this.leerCSV(
             RESPUESTAS_URL,
             'jovenes_respuestas'
+        );
+    }
+
+    obtenerReacciones() {
+        return this.leerCSV(
+            REACCIONES_URL,
+            'jovenes_reacciones'
         );
     }
 
