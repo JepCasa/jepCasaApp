@@ -309,6 +309,9 @@ export class Jovenes implements OnInit {
   textosRespuesta: Record<number, string> = {};
 
   guardandoRespuesta = false;
+
+  cargando = true;
+  errorCarga = false;
   // =========================
   // INIT
   // =========================
@@ -318,7 +321,12 @@ export class Jovenes implements OnInit {
   }
 
   async cargarTodo() {
+
+    this.cargando = true;
+    this.errorCarga = false;
+
     try {
+
       const [
         configuracion,
         usuarios,
@@ -327,17 +335,24 @@ export class Jovenes implements OnInit {
         respuestas,
         reacciones
       ] = await Promise.all([
+
         this.jovenesService.obtenerConfiguracion(),
+
         this.jovenesService.obtenerUsuarios(),
+
         this.jovenesService.obtenerLibros(),
+
         this.jovenesService.obtenerEstudios(),
+
         this.jovenesService.obtenerRespuestas(),
+
         this.jovenesService.obtenerReacciones()
+
       ]);
 
-      // =========================
+      // =====================================================
       // USUARIOS
-      // =========================
+      // =====================================================
 
       this.usuarios = usuarios.map(u => ({
         id: Number(u.id),
@@ -345,10 +360,9 @@ export class Jovenes implements OnInit {
         equipo: Number(u.equipo)
       }));
 
-      // =========================
+      // =====================================================
       // LIBROS
-      // =========================
-
+      // =====================================================
 
       this.libros = libros.map(l => ({
         año: Number(l.año),
@@ -360,15 +374,15 @@ export class Jovenes implements OnInit {
         pregunta3: l.pregunta3
       }));
 
-      // =========================
-      // CONFIG
-      // =========================
+      // =====================================================
+      // CONFIGURACION
+      // =====================================================
 
       const config = configuracion[0];
 
       this.configuracion = {
         anio: Number(config.anio),
-        libro: "",
+        libro: '',
         equipo1: config.equipo1,
         equipo2: config.equipo2,
         puntos_responder: Number(config.puntos_responder),
@@ -381,20 +395,21 @@ export class Jovenes implements OnInit {
       this.equipo2.nombre =
         this.configuracion.equipo2;
 
-      // =========================
+      // =====================================================
       // ESTUDIOS
-      // =========================
+      // =====================================================
 
       this.estudiosOriginales = estudios.map(e => {
-        const usuario = this.usuarios.find(u =>
-          u.id === Number(e.joven_id)
+
+        const usuario = this.usuarios.find(
+          u => u.id === Number(e.joven_id)
         );
 
         return {
           id: Number(e.id),
           mes: Number(e.mes),
           fecha: e.fecha,
-          joven: usuario?.nombre ?? "Sin nombre",
+          joven: usuario?.nombre ?? 'Sin nombre',
           equipo: usuario?.equipo ?? 0,
           pasaje: e.pasaje,
           estado: e.estado
@@ -402,14 +417,16 @@ export class Jovenes implements OnInit {
 
       });
 
+      // =====================================================
+      // RESPUESTAS Y REACCIONES
+      // =====================================================
+
       this.respuestas = respuestas;
       this.reacciones = reacciones;
-      console.log("DATOS LISTOS");
-      console.log(this.libros);
-      console.log(this.estudiosOriginales);
 
-      // IMPORTANTE
-      // cargar el mes actual recién cuando TODO existe
+      // =====================================================
+      // MES ACTUAL
+      // =====================================================
 
       this.cambiarMes(
         new Date().getMonth() + 1
@@ -417,13 +434,21 @@ export class Jovenes implements OnInit {
 
       this.cdr.detectChanges();
 
-    }
+    } catch (error) {
 
-    catch (error) {
       console.error(
-        "Error cargando datos:",
+        'Error cargando datos:',
         error
       );
+
+      this.errorCarga = true;
+
+    } finally {
+
+      this.cargando = false;
+
+      this.cdr.detectChanges();
+
     }
   }
 

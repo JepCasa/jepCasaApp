@@ -1,4 +1,40 @@
-<div class="container py-4">
+@if (cargando) {
+
+<div class="pantalla-cargando">
+
+    <div class="spinner"></div>
+
+    <h3>Cargando estudios...</h3>
+
+    <p>
+        Estamos preparando todo para vos
+    </p>
+
+</div>
+
+} @else if (errorCarga) {
+
+<div class="pantalla-error">
+
+    <div class="error-icon">
+        ⚠️
+    </div>
+
+    <h3>No pudimos cargar los estudios</h3>
+
+    <p>
+        Revisá tu conexión e intentá nuevamente.
+    </p>
+
+    <button class="btn btn-warning" (click)="cargarTodo()">
+
+        🔄 Reintentar
+
+    </button>
+
+</div>
+
+} @else {<div class="container py-4">
 
     <!-- CABECERA -->
 
@@ -287,3 +323,4 @@
     </div>
 
 </div>
+}
