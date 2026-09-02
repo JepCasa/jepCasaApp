@@ -315,6 +315,7 @@ export class Jovenes implements OnInit {
   errorCarga = false;
 
   mostrarAvisoFecha = false;
+
   estudioBloqueado: any = null;
   // =========================
   // INIT
@@ -433,8 +434,6 @@ export class Jovenes implements OnInit {
         new Date().getMonth() + 1
       );
 
-      this.posicionarEnEquiposMobile();
-
       this.cdr.detectChanges();
 
     } catch (error) {
@@ -452,21 +451,6 @@ export class Jovenes implements OnInit {
 
       this.cdr.detectChanges();
 
-    }
-  }
-
-  private posicionarEnEquiposMobile(): void {
-    if (window.innerWidth <= 768) {
-      setTimeout(() => {
-        const equipos = document.getElementById('equipos-mobile');
-
-        if (equipos) {
-          equipos.scrollIntoView({
-            behavior: 'instant',
-            block: 'start'
-          });
-        }
-      }, 100);
     }
   }
 
@@ -513,6 +497,16 @@ export class Jovenes implements OnInit {
 
   cerrarInfoLibro(): void {
     this.mostrarInfoLibro = false;
+  }
+
+  mostrarReglasPuntuacion = false;
+  
+  verReglasPuntuacion(): void {
+    this.mostrarReglasPuntuacion = true;
+  }
+
+  cerrarReglasPuntuacion(): void {
+    this.mostrarReglasPuntuacion = false;
   }
   // =========================
   // FILTRO

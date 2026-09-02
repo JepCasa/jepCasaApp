@@ -35,81 +35,46 @@
 </div>
 
 } @else {
-<div class="container py-4">
+<div class="container py-3">
 
     <!-- CABECERA -->
 
-    <div class="text-center mb-4">
+    <div class="text-center mb-3">
 
-        <span class="badge bg-secondary fs-6">
-            {{ configuracion.anio }}
-        </span>
 
         <h2 class="titulo mt-2">
 
-            Estudio Jóvenes Jep -
+            Estudio Jóvenes JEP
+
+            <span class=>
+                {{ ' - ' + configuracion.anio + ' - ' }}
+            </span>
 
             <span class="libro-titulo">
 
                 {{ libroActual?.libro ?? 'Cargando...' }}
 
                 <button class="btn-info-libro" (click)="verInfoLibro()" aria-label="Información del libro"
-                    title="Ver información">
-
+                    title="Información del libro">
                     i
+                </button>
 
+                <button class="btn-puntuacion" (click)="verReglasPuntuacion()" aria-label="Reglas de puntuación"
+                    title="Reglas de puntuación">
+                    🏆
                 </button>
 
             </span>
 
         </h2>
 
-        <!-- REGLAS DE PUNTUACIÓN -->
-
-        <div class="reglas-puntuacion mt-4">
-
-            <div class="reglas-titulo">
-                <span>🏆</span>
-                <strong>Reglas de puntuación</strong>
-            </div>
-
-            <div class="reglas-items">
-
-                <div class="regla">
-                    <span class="regla-icon">📅</span>
-                    <div>
-                        <strong>50 pts</strong>
-                        <small>Día asignado</small>
-                    </div>
-                </div>
-
-                <div class="regla">
-                    <span class="regla-icon">📆</span>
-                    <div>
-                        <strong>35 pts</strong>
-                        <small>Otro día del mismo mes</small>
-                    </div>
-                </div>
-
-                <div class="regla">
-                    <span class="regla-icon">⏳</span>
-                    <div>
-                        <strong>10 pts</strong>
-                        <small>En otro mes</small>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
     </div>
 
     <!-- BUSCADOR -->
 
-    <div class="row justify-content-center mb-4">
+    <div class="row justify-content-center mb-3">
 
-        <div class="col-lg-4 col-md-6">
+        <div class="col-lg-4 col-md-4">
 
             <input type="text" class="form-control" placeholder="Buscar por nombre..." [(ngModel)]="textoBusqueda"
                 (input)="buscar()">
@@ -119,7 +84,7 @@
 
     <!-- MESES -->
 
-    <div class="d-flex justify-content-center flex-wrap gap-2 mb-4">
+    <div class="meses-selector d-flex justify-content-center flex-wrap gap-2 mb-4">
 
         @for(mes of meses; track mes.id){
 
@@ -315,7 +280,7 @@
 
     <!-- SELECTOR DE EQUIPO - SOLO MOBILE -->
 
-    <div class="selector-equipos-mobile mb-4">
+    <div class="selector-equipos-mobile mb-3">
 
         <button class="btn" [class.activo]="equipoSeleccionadoMobile === 1" (click)="seleccionarEquipoMobile(1)">
             {{ equipo1.nombre }}
@@ -454,6 +419,59 @@
         </div>
 
         <button class="btn btn-warning btn-cerrar-info" (click)="cerrarInfoLibro()">
+
+            Entendido
+
+        </button>
+
+    </div>
+
+</div>
+
+}
+@if (mostrarReglasPuntuacion) {
+
+<div class="modal-info-overlay" (click)="cerrarReglasPuntuacion()">
+
+    <div class="modal-info" (click)="$event.stopPropagation()">
+
+        <div class="info-icon">
+            🏆
+        </div>
+
+        <h3>
+            Reglas de puntuación
+        </h3>
+
+        <div class="info-contenido reglas-modal">
+
+            <div class="regla-modal">
+                <span>📅</span>
+                <div>
+                    <strong>50 puntos</strong>
+                    <small>Día asignado</small>
+                </div>
+            </div>
+
+            <div class="regla-modal">
+                <span>📆</span>
+                <div>
+                    <strong>35 puntos</strong>
+                    <small>Otro día del mismo mes</small>
+                </div>
+            </div>
+
+            <div class="regla-modal">
+                <span>⏳</span>
+                <div>
+                    <strong>10 puntos</strong>
+                    <small>En otro mes</small>
+                </div>
+            </div>
+
+        </div>
+
+        <button class="btn btn-warning btn-cerrar-info" (click)="cerrarReglasPuntuacion()">
 
             Entendido
 

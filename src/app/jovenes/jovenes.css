@@ -463,6 +463,9 @@
 
     }
 
+    .meses-selector {
+        margin-bottom: 5px !important;
+    }
 
 }
 
@@ -527,7 +530,7 @@
         border: none;
         border-radius: 10px;
 
-        padding: 12px 8px;
+        padding: 8px 8px;
 
         background: transparent;
         color: #94a3b8;
@@ -685,112 +688,61 @@
 /* ========================================
    REGLAS DE PUNTUACIÓN
 ======================================== */
-
-.reglas-puntuacion {
-    max-width: 720px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 16px 20px;
-
-    background: rgba(30, 41, 59, .65);
-    border: 1px solid rgba(255, 255, 255, .08);
-    border-radius: 16px;
-
-    box-shadow: 0 8px 25px rgba(0, 0, 0, .25);
-}
-
-.reglas-titulo {
-    display: flex;
+.btn-puntuacion {
+    width: 25px;
+    height: 25px;
+    padding: 0;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-
-    color: white;
-    font-size: .95rem;
-    margin-bottom: 14px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, .3);
+    background: rgba(250, 204, 21, .12);
+    color: #facc15;
+    font-size: .8rem;
+    cursor: pointer;
+    transition: .2s;
 }
 
-.reglas-titulo span {
-    font-size: 1.1rem;
+.btn-puntuacion:hover {
+    background: rgba(250, 204, 21, .25);
+    border-color: #facc15;
+    transform: scale(1.08);
 }
 
-.reglas-items {
+.reglas-modal {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     gap: 10px;
 }
 
-.regla {
-    flex: 1;
-
+.regla-modal {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 9px;
-
-    padding: 10px 12px;
-
+    gap: 12px;
+    padding: 12px;
     background: rgba(2, 6, 23, .45);
-    border: 1px solid rgba(255, 255, 255, .06);
     border-radius: 12px;
 }
 
-.regla-icon {
-    font-size: 1.1rem;
+.regla-modal>span {
+    font-size: 1.3rem;
 }
 
-.regla div {
+.regla-modal div {
     display: flex;
     flex-direction: column;
     text-align: left;
 }
 
-.regla strong {
+.regla-modal strong {
     color: #facc15;
     font-size: .9rem;
 }
 
-.regla small {
+.regla-modal small {
     color: #94a3b8;
-    font-size: .7rem;
-}
-
-
-/* MOBILE */
-
-@media (max-width: 768px) {
-
-    .reglas-puntuacion {
-        padding: 14px 10px;
-    }
-
-    .reglas-items {
-        gap: 6px;
-    }
-
-    .regla {
-        flex-direction: column;
-        gap: 3px;
-        padding: 9px 5px;
-        text-align: center;
-    }
-
-    .regla div {
-        align-items: center;
-        text-align: center;
-    }
-
-    .regla-icon {
-        font-size: 1rem;
-    }
-
-    .regla strong {
-        font-size: .85rem;
-    }
-
-    .regla small {
-        font-size: .65rem;
-    }
+    font-size: .75rem;
 }
 
 /* ========================================
