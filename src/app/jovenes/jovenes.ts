@@ -287,6 +287,7 @@ export class Jovenes implements OnInit {
 
   estudiosEquipo1: Estudio[] = [];
   estudiosEquipo2: Estudio[] = [];
+  estudioDeHoy: Estudio | null = null;
 
   usuarios: any[] = [];
 
@@ -335,7 +336,7 @@ export class Jovenes implements OnInit {
         usuarios,
         libros,
         estudios,
-        respuestas 
+        respuestas
       ] = await Promise.all([
 
         this.jovenesService.obtenerConfiguracion(),
@@ -426,10 +427,13 @@ export class Jovenes implements OnInit {
       // =====================================================
       // MES ACTUAL
       // =====================================================
+      this.buscarEstudioDeHoy();
 
       this.cambiarMes(
         new Date().getMonth() + 1
       );
+
+      this.posicionarEnEquiposMobile();
 
       this.cdr.detectChanges();
 
@@ -448,6 +452,21 @@ export class Jovenes implements OnInit {
 
       this.cdr.detectChanges();
 
+    }
+  }
+
+  private posicionarEnEquiposMobile(): void {
+    if (window.innerWidth <= 768) {
+      setTimeout(() => {
+        const equipos = document.getElementById('equipos-mobile');
+
+        if (equipos) {
+          equipos.scrollIntoView({
+            behavior: 'instant',
+            block: 'start'
+          });
+        }
+      }, 100);
     }
   }
 
@@ -500,21 +519,37 @@ export class Jovenes implements OnInit {
   // =========================
 
   filtrarEquipos() {
+
     const texto =
       this.textoBusqueda.toLowerCase();
 
     const lista =
       this.estudios.filter(e =>
-        (e.joven ?? "")
+        (e.joven ?? '')
           .toLowerCase()
           .includes(texto)
       );
 
+    const ordenarHoyPrimero = (a: Estudio, b: Estudio) => {
+
+      const aEsHoy = this.estudioDeHoy?.id === a.id;
+      const bEsHoy = this.estudioDeHoy?.id === b.id;
+
+      if (aEsHoy && !bEsHoy) return -1;
+      if (!aEsHoy && bEsHoy) return 1;
+
+      return 0;
+    };
+
     this.estudiosEquipo1 =
-      lista.filter(e => e.equipo === 1);
+      lista
+        .filter(e => e.equipo === 1)
+        .sort(ordenarHoyPrimero);
 
     this.estudiosEquipo2 =
-      lista.filter(e => e.equipo === 2);
+      lista
+        .filter(e => e.equipo === 2)
+        .sort(ordenarHoyPrimero);
   }
 
   buscar() {
@@ -792,6 +827,41 @@ export class Jovenes implements OnInit {
     if (!fecha) return '';
 
     return fecha.charAt(0).toUpperCase() + fecha.slice(1);
+  }
+
+  private buscarEstudioDeHoy(): void {
+    const hoy = new Date();
+
+    const hoyNumero =
+      hoy.getFullYear() * 10000 +
+      (hoy.getMonth() + 1) * 100 +
+      hoy.getDate();
+
+    this.estudioDeHoy =
+      this.estudiosOriginales.find(estudio => {
+
+        const fecha = parsearFecha(
+          estudio.fecha,
+          this.configuracion.anio
+        );
+
+        if (!fecha) {
+          return false;
+        }
+
+        const fechaNumero =
+          fecha.anio * 10000 +
+          fecha.mes * 100 +
+          fecha.dia;
+
+        return fechaNumero === hoyNumero;
+
+      }) ?? null;
+
+    if (this.estudioDeHoy) {
+      this.equipoSeleccionadoMobile =
+        this.estudioDeHoy.equipo;
+    }
   }
 
 }

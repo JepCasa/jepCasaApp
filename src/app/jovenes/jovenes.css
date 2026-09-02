@@ -828,11 +828,9 @@
     padding: 30px 28px;
 
     background:
-        linear-gradient(
-            180deg,
+        linear-gradient(180deg,
             #1e293b,
-            #0f172a
-        );
+            #0f172a);
 
     border: 1px solid rgba(255, 255, 255, .08);
 
@@ -922,7 +920,7 @@
 }
 
 
-.fecha-asignada > span {
+.fecha-asignada>span {
     font-size: 1.4rem;
 }
 
@@ -1114,11 +1112,9 @@
     padding: 30px 28px;
 
     background:
-        linear-gradient(
-            180deg,
+        linear-gradient(180deg,
             #1e293b,
-            #0f172a
-        );
+            #0f172a);
 
     border: 1px solid rgba(255, 255, 255, .08);
 
@@ -1238,4 +1234,19 @@
     padding: 10px;
 
     font-weight: 600;
+}
+
+.estudio-hoy {
+    border: 2px solid #ffc107;
+    box-shadow: 0 0 12px rgba(255, 193, 7, 0.45);
+    position: relative;
+}
+
+.badge-hoy {
+    background: #ffc107;
+    color: #212529;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 9px;
+    border-radius: 20px;
 }

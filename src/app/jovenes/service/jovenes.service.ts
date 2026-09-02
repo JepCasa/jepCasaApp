@@ -19,9 +19,9 @@ const RESPUESTAS_URL =
 const GUARDAR_RESPUESTA_URL =
     'https://script.google.com/macros/s/AKfycbxENC9MSO_7Pq-OQvEZlnoFZVrS3G-jblIEr-oQaiG4Q7YgarmJGK6hC5QK2Z39GuHl/exec';
 
-const TIMEOUT_DESCARGA_MS = 15000;
+const TIMEOUT_DESCARGA_MS = 30000;
 const MAX_REINTENTOS = 2;
-const ESPERA_ENTRE_REINTENTOS_MS = 1200;
+const ESPERA_ENTRE_REINTENTOS_MS = 2000;
 
 export interface RespuestaParaGuardar {
     estudio_id: number;

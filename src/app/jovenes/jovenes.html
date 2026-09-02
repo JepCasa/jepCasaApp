@@ -216,13 +216,24 @@
 
     <ng-template #estudioCard let-estudio>
 
-        <div class="card estudio-card mb-3" [class.respondida]="estudio.estado==='Respondida'">
+        <div class="card estudio-card mb-3" [class.respondida]="estudio.estado === 'Respondida'"
+            [class.estudio-hoy]="estudioDeHoy?.id === estudio.id">
 
             <div class="card-body text-center">
 
-                <h5>
-                    {{estudio.joven}}
-                </h5>
+                <div class="d-flex justify-content-center align-items-center gap-2 flex-wrap">
+
+                    <h5 class="mb-0">
+                        {{estudio.joven}}
+                    </h5>
+
+                    @if (estudioDeHoy?.id === estudio.id) {
+                    <span class="badge-hoy">
+                        HOY
+                    </span>
+                    }
+
+                </div>
 
                 <p>
                     {{estudio.pasaje}}
